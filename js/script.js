@@ -1,5 +1,4 @@
 "use strict";
-let f = () => {
 const goods = [
     {title: 'Shirt', price: '150 &#8381;'},
     {title: 'Socks', price: '50 &#8381;'},
@@ -15,4 +14,3 @@ const goods = [
         document.querySelector('.goods-list').innerHTML = goodsList.join('');
     }
     renderGoodsList(goods);
-}
