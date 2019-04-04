@@ -1,0 +1,66 @@
+/*Подключение шрифта*/
+@font-face{
+    font-family: lobster;
+    src: url("fonts/Lobster/Lobster-Regular.ttf");
+}
+* {
+    margin: 0;
+    padding: 0;
+   }
+html,body{
+    margin: 0;
+}
+/*шапка сайта*/
+header{
+    margin: 0;
+    width: 100%;
+    background-image: url("../img/header.jpg");
+    background-repeat: repeat;
+    background-size: cover;
+    min-height: 156px;
+    background-repeat: no-repeat;
+    background-position-y: -220px;
+}
+h1{
+    text-align: center;
+    font-size: 32pt;
+    font-family: lobster;
+    color: #fc6147;
+    margin-top: 0;
+    margin: 0px auto;
+    padding-top: 30px;
+    margin-bottom: 0;
+}
+.cart-button{
+    position: absolute;
+    left: 92%;
+    top: 12%;
+}
+.cleaner{
+    width: 100%;
+    height: 0;
+    clear: both;
+}
+/*Каталог товаров*/
+main{
+    min-height: 75vh;
+    width: 80%;
+    margin: 0 auto;
+}
+.goods-list{
+
+}
+
+/*Подвал сайта*/
+footer{
+    display: flex;
+    min-height: 80px;
+    font-size: 12pt;
+    color: brown;
+    background-image: url("../img/footer.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    align-items: center;
+    justify-content: center;
+}
