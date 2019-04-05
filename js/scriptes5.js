@@ -13,11 +13,12 @@ const goods = [
     {title: 'Платформа Intel NUC Original', price: '37600&#8381;', src: '../img/catalog/platformIntel.jpg'},
     ];
 /*Функция формирования товара */
-    const renderGoodsItem = (title, price,src) => {
-        return `<div class="goods-item"><h2 class="name-tovar">${title}</h2><img src="${src}"><p>${price}</p><div class="btn-buy-goods" ></div></div>`;
+    const renderGoodsItem = function (title, price,src) {
+        var result = '<div class="goods-item"><h2 class="name-tovar">'+title+'</h2><img src="'+src+'"><p>'+price+'</p><div class="btn-buy-goods"></div></div>';
+        return result;
     };
 /*Функция добавления товара на страницу */
-    const renderGoodsList = (list) => {
+    const renderGoodsList = function (list) {
         let goodsList = list.map(item => renderGoodsItem(item.title, item.price, item.src));
         document.querySelector('.goods-list').innerHTML = goodsList.join('');
     }
