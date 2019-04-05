@@ -3,10 +3,6 @@
     font-family: lobster;
     src: url("fonts/Lobster/Lobster-Regular.ttf");
 }
-* {
-    margin: 0;
-    padding: 0;
-   }
 html,body{
     margin: 0;
 }
@@ -14,11 +10,10 @@ html,body{
 header{
     margin: 0;
     width: 100%;
-    background-image: url("../img/header.jpg");
-    background-repeat: repeat;
-    background-size: cover;
-    min-height: 156px;
-    background-position-y: -220px;
+    background-image: url("../img/header1.jpg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 150px;
 }
 h1{
     text-align: center;
@@ -42,8 +37,8 @@ h1{
 }
 /*Каталог товаров*/
 main{
-    min-height: calc(100vh - 256px);
-    width: 80%;
+    
+    width: 1105px;
     margin: 0 auto;
 }
 
@@ -59,4 +54,18 @@ footer{
     background-repeat: no-repeat;
     align-items: center;
     justify-content: center;
+}
+.goods-item img{
+    height: 200px;
+}
+.goods-item{
+    float: left;
+    margin-right: 35px;
+    width: 250px;
+}
+.goods-item:nth-child(4n){
+    margin-right: 0px;
+}
+.name-tovar{
+    min-height: 54px;
 }
