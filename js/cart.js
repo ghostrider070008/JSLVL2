@@ -38,10 +38,30 @@ class CartList{
     constructor() {
         this.goods = [];
     }
-   addGoods(title, price, pice) {
-    
+    // Добавление товара в корзину
+   addGoods(title, price, piece) {
+    let id = this.goods.length;
+    let total = this.totalGoods(price, piece);
+        this.goods[id] = {title, price, piece, total};
    // }
 }
+    // Удаление товара из корзины
+    deleteGoods(id){
+        this.goods.splice(id,1);
+    }
+    // расчет стоимости товара
+    totalGoods(price, piece){
+        return price*piece;
+    }
+    // расчет итогово стоимости товаров в корзине
+    TotalCart(){
+        let CartTotal = 0;
+        for (let index = 0; index < this.goods.length; ++index) {
+           CartTotal += this.goods[index].total
+        }
+        return CartTotal;
+
+    }
 }
 // основная программа
 
@@ -51,5 +71,8 @@ let GoodsList = new GoodsListClass();
 
 //let NewGoods = new GoodsList('Ноутбук Asus X540UA-DM597T', 31200, 'img/123.jpg');
 let cart = new CartList();
+cart.addGoods('Ноутбук Asus X540UA-DM597T', 31200, 2);
+cart.addGoods('Ноутбук Asus X540UA-DM597T', 31200, 2);
 console.log(cart);
 console.log(GoodsList);
+console.log(cart.TotalCart());
