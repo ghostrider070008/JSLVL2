@@ -1,4 +1,5 @@
 "use strict";
+
 /*
 let cart = [], i = 0;
 class CartGoods {
@@ -28,9 +29,25 @@ class GoodsListClass{
     constructor (){
         this.goods = [];
     }
+    //Заполнение товаром объекта
+    addfullGods(list){
+        let goodsList = list.map(item => this.addGoods(item.title, item.price, item.src));
+    }
+    //добавление товара
     addGoods(title, price, src){
        let id = this.goods.length;
         this.goods[id] = {title, price, src};
+    }
+    //удаление товара
+    deleteGoods(id){
+        this.goods.splice(id,1);
+    }
+    renderGoodsItem(title, price, src){
+        return `<div class="goods-item"><h2 class="name-tovar">${title}</h2><img src="${src}"><p>${price}</p><div class="btn-buy-goods" ></div></div>`;
+    }
+    renderGoodsList(list){
+        let goodsList = list.map(item => this.renderGoodsItem(item.title, item.price, item.src));
+        document.querySelector('.goods-list').innerHTML = goodsList.join();
     }
 }
 // Класс со списком корзины
@@ -64,7 +81,18 @@ class CartList{
     }
 }
 // основная программа
+/*
+let GoodsListClass1 = new GoodsListClass();
+    GoodsListClass1.renderGoodsList(goods);
+    console.log(GoodsListClass1);
+    */
+   let GoodsListClass1 = new GoodsListClass();
+    //GoodsListClass1.addGoods(goods[0].title, goods[0].price, goods[0].src);
+    GoodsListClass1.addfullGods(goods); // добавление списка товаров
+    GoodsListClass1.renderGoodsList(GoodsListClass1.goods); // вывод товаров на страницу
+    //console.log(GoodsListClass1);
 
+/*
 let GoodsList = new GoodsListClass();
     GoodsList.addGoods('Ноутбук Asus X540UA-DM597T', 31200, 'img/123.jpg');
     GoodsList.addGoods('Ноутбук Asus X540UA-DM597T', 31200, 'img/123.jpg');
@@ -76,3 +104,4 @@ cart.addGoods('Ноутбук Asus X540UA-DM597T', 31200, 2);
 console.log(cart);
 console.log(GoodsList);
 console.log(cart.TotalCart());
+*/
