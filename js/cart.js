@@ -94,7 +94,29 @@ class CartList{
         let goodsList = list.map(item => this.renderGoodsItem(item.title, item.price, item.piece, item.total));
         document.querySelector('.table-cart').innerHTML = goodsList.join('');
     }
-}
+    CallCart(){
+    document.querySelector('.cart-overlay').style.display = "table";
+    this.CallCartOp();
+    }
+    // Плавное появление окна
+    CallCartOp(){
+        let el = document.getElementsByClassName("cart-overlay")[0];
+        let op = 0;
+     setTimeout(function func() {
+         if (op > 1)
+             return;
+         el.style.opacity = op;
+         op += 0.1;
+         setTimeout (func, 25);
+     }, 25);
+        let opas = document.querySelector('.cart-overlay').style.opacity;
+        console.log(opas);
+       /* while (opas!=1){
+            opas +=0.1;
+            document.querySelector('.cart-overlay').style.opacity = opas;
+            setTimeout(this.CallCartOp, 100);*/
+        }
+    }
 // основная программа
 /*
 let GoodsListClass1 = new GoodsListClass();
@@ -108,11 +130,12 @@ let GoodsListClass1 = new GoodsListClass();
     //GoodsListClass1.addGoods(goods[0].title, goods[0].price, goods[0].src);
     GoodsListClass1.addfullGods(goods); // добавление списка товаров
     GoodsListClass1.renderGoodsList(GoodsListClass1.goods); // вывод товаров на страницу
-    CartList1.headerCart();
+    
     CartList1.addGoods(GoodsListClass1.goods[id].title,GoodsListClass1.goods[id].price, 1);
     CartList1.addGoods(GoodsListClass1.goods[3].title,GoodsListClass1.goods[3].price, 1);
     //CartList1.renderGoodsList(CartList1.goods);
     CartList1.renderGoodsList(CartList1.goods);
+    CartList1.headerCart();
     console.log(CartList1);
     //console.log(GoodsListClass1);
 
