@@ -9,3 +9,6 @@ const goods = [];
     goods[7] = {title: 'МФУ Brother DCP-1510R монохромное/лазерное', price: 11140, src: '../img/catalog/mfuBrotherdcp-1510r.jpg'};
     goods[8] = {title: 'Монитор LG Flatron 29UM69G-B 29" gl.Black', price: 16800, src: '../img/catalog/monitorLG29.jpg'};
     goods[9] = {title: 'Платформа Intel NUC Original', price: 37600, src: '../img/catalog/platformIntel.jpg'};
+
+    let ident = 0;
+    let ident_cart = 0;

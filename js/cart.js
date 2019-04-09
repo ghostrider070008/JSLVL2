@@ -43,7 +43,8 @@ class GoodsListClass{
         this.goods.splice(id,1);
     }
     renderGoodsItem(title, price, src){
-        return `<div class="goods-item"><h2 class="name-tovar">${title}</h2><img src="${src}"><p>${price}&#8381;</p><div class="btn-buy-goods" ></div></div>`;
+        return `<div class="goods-item"><h2 class="name-tovar">${title}</h2><img src="${src}"><p>${price}&#8381;</p><div class="btn-buy-goods" onclick="CartList1.addGoods(${ident},GoodsListClass1.goods[${ident}].title,GoodsListClass1.goods[${ident++}].price, 1);"></div></div>`;
+
     }
     renderGoodsList(list){
         let goodsList = list.map(item => this.renderGoodsItem(item.title, item.price, item.src));
@@ -56,11 +57,37 @@ class CartList{
         this.goods = [];
     }
     // Добавление товара в корзину
-   addGoods(title, price, piece) {
-    let id = this.goods.length;
-    let total = this.totalGoods(price, piece);
-        this.goods[id] = {title, price, piece, total};
+   addGoods(index,title, price, piece) {
+       let id,total, check;
+       check = false;
+    if (this.goods.length > 0 && check == false){
+        for (var i=0; i < this.goods.length; i++){
+            if (this.goods[i].index == index){
+                this.goods[i].piece += 1;
+                this.goods[i].total = this.goods[i].price * this.goods[i].piece;
+                check = true;
+                break;
+            }
+            else{
+                check = false;
+            }
+
+            
+        }
+        if (check == false){
+            id = this.goods.length;
+            total = this.totalGoods(price, piece);
+            this.goods[id] = {index,title, price, piece, total};
+        }
+        
+    }
+    else{
+    id = this.goods.length;
+    total = this.totalGoods(price, piece);
+    this.goods[id] = {index,title, price, piece, total};
+    }
    // }
+   console.log('Товар добавлен в корзину');
 }
     // Удаление товара из корзины
     deleteGoods(id){
@@ -77,11 +104,12 @@ class CartList{
            CartTotal += this.goods[index].total;
         }
         let TotalCartPage = document.createElement('tr');
-        TotalCartPage.innerHTML = `<td collspan="2"><b>Итого</b></td><td callspan="2">${CartTotal}</td>`; 
+        TotalCartPage.innerHTML = `<td colspan="2"><b>Итого:</b></td><td>${CartTotal}</td>`; 
         document.getElementsByTagName("table")[0].appendChild(TotalCartPage);
         return CartTotal;
 
     }
+    // шапка таблицы товаров
     headerCart(){
 
         let tag = `<td><b>Наименование</b></td><td><b>Цена</b></td><td><b>Количество</b></td><td><b>Стоимость</b></td>`;
@@ -92,7 +120,7 @@ class CartList{
     }
     //формирование тега товара в корзине
     renderGoodsItem(title, price, piece, total){
-        return `<tr><td>${title}</td><td>${price}</td><td>${piece}</td><td>${total}</td></tr>`;
+        return `<tr><td>${title}</td><td>${price}</td><td>${piece}</td><td>${total}</td><td><button onclick="CartList1.deleteGoods(${ident_cart++})">Удалить</button></td></tr>`;
     }
     renderGoodsList(list){
         let goodsList = list.map(item => this.renderGoodsItem(item.title, item.price, item.piece, item.total));
@@ -141,11 +169,11 @@ class CartList{
     GoodsListClass1.addfullGods(goods); // добавление списка товаров
     GoodsListClass1.renderGoodsList(GoodsListClass1.goods); // вывод товаров на страницу
     
-    CartList1.addGoods(GoodsListClass1.goods[id].title,GoodsListClass1.goods[id].price, 1);
-    CartList1.addGoods(GoodsListClass1.goods[3].title,GoodsListClass1.goods[3].price, 1);
+    //CartList1.addGoods(GoodsListClass1.goods[id].title,GoodsListClass1.goods[id].price, 1);
+    //CartList1.addGoods(GoodsListClass1.goods[3].title,GoodsListClass1.goods[3].price, 1);
     //CartList1.renderGoodsList(CartList1.goods);
-    CartList1.renderGoodsList(CartList1.goods);
-    CartList1.headerCart();
+    //CartList1.renderGoodsList(CartList1.goods);
+   // CartList1.headerCart();
     console.log(CartList1);
     //console.log(GoodsListClass1);
 
