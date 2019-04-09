@@ -43,11 +43,11 @@ class GoodsListClass{
         this.goods.splice(id,1);
     }
     renderGoodsItem(title, price, src){
-        return `<div class="goods-item"><h2 class="name-tovar">${title}</h2><img src="${src}"><p>${price}</p><div class="btn-buy-goods" ></div></div>`;
+        return `<div class="goods-item"><h2 class="name-tovar">${title}</h2><img src="${src}"><p>${price}&#8381;</p><div class="btn-buy-goods" ></div></div>`;
     }
     renderGoodsList(list){
         let goodsList = list.map(item => this.renderGoodsItem(item.title, item.price, item.src));
-        document.querySelector('.goods-list').innerHTML = goodsList.join();
+        document.querySelector('.goods-list').innerHTML = goodsList.join("");
     }
 }
 // Класс со списком корзины
@@ -74,10 +74,25 @@ class CartList{
     TotalCart(){
         let CartTotal = 0;
         for (let index = 0; index < this.goods.length; ++index) {
-           CartTotal += this.goods[index].total
+           CartTotal += this.goods[index].total;
         }
         return CartTotal;
+    }
+    headerCart(){
 
+        let tag = `<td><b>Наименование</b></td><td><b>Цена</b></td><td><b>Количество</b></td><td><b>Стоимость</b></td>`;
+        let strong = document.createElement('tr');
+        strong.innerHTML = tag;
+        parent = document.querySelector('.table-cart');
+        parent.insertBefore(strong, parent.firstElementChild);
+    }
+    //формирование тега товара в корзине
+    renderGoodsItem(title, price, piece, total){
+        return `<tr><td>${title}</td><td>${price}</td><td>${piece}</td><td>${total}</td></tr>`;
+    }
+    renderGoodsList(list){
+        let goodsList = list.map(item => this.renderGoodsItem(item.title, item.price, item.piece, item.total));
+        document.querySelector('.table-cart').innerHTML = goodsList.join('');
     }
 }
 // основная программа
@@ -86,10 +101,19 @@ let GoodsListClass1 = new GoodsListClass();
     GoodsListClass1.renderGoodsList(goods);
     console.log(GoodsListClass1);
     */
-   let GoodsListClass1 = new GoodsListClass();
+   let GoodsListClass1 = new GoodsListClass(), 
+        CartList1 = new CartList(),
+        id = 0;
+    
     //GoodsListClass1.addGoods(goods[0].title, goods[0].price, goods[0].src);
     GoodsListClass1.addfullGods(goods); // добавление списка товаров
     GoodsListClass1.renderGoodsList(GoodsListClass1.goods); // вывод товаров на страницу
+    CartList1.headerCart();
+    CartList1.addGoods(GoodsListClass1.goods[id].title,GoodsListClass1.goods[id].price, 1);
+    CartList1.addGoods(GoodsListClass1.goods[3].title,GoodsListClass1.goods[3].price, 1);
+    //CartList1.renderGoodsList(CartList1.goods);
+    CartList1.renderGoodsList(CartList1.goods);
+    console.log(CartList1);
     //console.log(GoodsListClass1);
 
 /*
