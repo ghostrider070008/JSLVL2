@@ -76,7 +76,11 @@ class CartList{
         for (let index = 0; index < this.goods.length; ++index) {
            CartTotal += this.goods[index].total;
         }
+        let TotalCartPage = document.createElement('tr');
+        TotalCartPage.innerHTML = `<td collspan="2"><b>Итого</b></td><td callspan="2">${CartTotal}</td>`; 
+        document.getElementsByTagName("table")[0].appendChild(TotalCartPage);
         return CartTotal;
+
     }
     headerCart(){
 
@@ -96,33 +100,39 @@ class CartList{
     }
     CallCart(){
     document.querySelector('.cart-overlay').style.display = "table";
-    this.CallCartOp();
+    this.CartOpen();
     }
     // Плавное появление окна
-    CallCartOp(){
+    CartOpen(){
+        
         let el = document.getElementsByClassName("cart-overlay")[0];
         let op = 0;
      setTimeout(function func() {
-         if (op > 1)
-             return;
+         if (op > 1){
+            return;
+         }
          el.style.opacity = op;
          op += 0.1;
-         setTimeout (func, 25);
-     }, 25);
-        let opas = document.querySelector('.cart-overlay').style.opacity;
-        console.log(opas);
-       /* while (opas!=1){
-            opas +=0.1;
-            document.querySelector('.cart-overlay').style.opacity = opas;
-            setTimeout(this.CallCartOp, 100);*/
+         setTimeout (func, 50);
+     }, 50);
         }
+        // Функция закрытия корзины
+        CartClose(){
+            let el = document.getElementsByClassName("cart-overlay")[0];
+            let op = 1;
+         setTimeout(function func() {
+             if (op <= 0){
+                document.getElementsByClassName("cart-overlay")[0].style.display = "none";
+                 return;
+             }
+             el.style.opacity = op;
+             op -= 0.1;
+             setTimeout (func, 50);
+         }, 50);
+            }
     }
 // основная программа
-/*
-let GoodsListClass1 = new GoodsListClass();
-    GoodsListClass1.renderGoodsList(goods);
-    console.log(GoodsListClass1);
-    */
+
    let GoodsListClass1 = new GoodsListClass(), 
         CartList1 = new CartList(),
         id = 0;
