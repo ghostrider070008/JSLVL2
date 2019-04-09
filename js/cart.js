@@ -124,7 +124,8 @@ class CartList{
         
         let el = document.getElementsByClassName("cart-overlay")[0];
         let op = 0;
-     setTimeout(function func() {
+        let func;
+     setTimeout(func = () => {
          if (op > 1){
             return;
          }
@@ -137,7 +138,8 @@ class CartList{
         CartClose(){
             let el = document.getElementsByClassName("cart-overlay")[0];
             let op = 1;
-         setTimeout(function func() {
+            let func;
+         setTimeout(func = () => {
              if (op <= 0){
                 document.getElementsByClassName("cart-overlay")[0].style.display = "none";
                  return;
