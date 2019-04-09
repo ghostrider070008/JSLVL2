@@ -11,4 +11,3 @@ const goods = [];
     goods[9] = {title: 'Платформа Intel NUC Original', price: 37600, src: '../img/catalog/platformIntel.jpg'};
 
     let ident = 0;
-    let ident_cart = 0;
