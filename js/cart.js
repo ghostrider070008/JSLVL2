@@ -1,6 +1,21 @@
 "use strict";
-
-
+let makeGetRequest = (url,callback) => {
+    let xhr;
+    if (window.XMLHttpRequest){
+        xhr = new XMLHttpRequest ();
+        }
+    else if (window.ActiveXObject){
+        xhr = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xhr.onreadystatechange = () =>{
+            if (xhr.readyState === 4 ){
+                callback(xhr.responseText);
+            }
+        }
+        xhr.open('GET', url, true);
+        xhr.send();
+}
+const API_URL = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses';
 // Класс со списком товаров
 class GoodsListClass{
     
@@ -10,6 +25,12 @@ class GoodsListClass{
     //Заполнение товаром объекта
     addfullGods(list){
         let goodsList = list.map(item => this.addGoods(item.title, item.price, item.src));
+    }
+    fetchGoods(cb){
+        makeGetRequest(`${API_URL}/catalogData.json`,(goods) =>{
+            this.goods = JSON.parse(goods);
+            cb();
+        })
     }
     //добавление товара
     addGoods(title, price, src){
