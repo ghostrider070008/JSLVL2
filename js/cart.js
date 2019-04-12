@@ -1,6 +1,7 @@
 "use strict";
-let makeGetRequest = (url,callback) => {
+let makeGetRequest = (url) => {
     let xhr;
+    let promise = new Promise((resolve, reject) => {
     if (window.XMLHttpRequest){
         xhr = new XMLHttpRequest ();
         }
@@ -8,13 +9,22 @@ let makeGetRequest = (url,callback) => {
         xhr = new ActiveXObject("Microsoft.XMLHTTP");
         }
         xhr.onreadystatechange = () =>{
-            if (xhr.readyState === 4 ){
-                callback(xhr.responseText);
+           
+            if (xhr.readyState === 4){
+                resolve(xhr.responseText);
+                //callback(xhr.responseText);
+                }
+            else if (xhr.status !== 200 && xhr.status !== 0) {
+                reject(xhr.status);
             }
+            
         }
         xhr.open('GET', url, true);
         xhr.send();
+    })
+    return promise;
 }
+
 const API_URL = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses';
 // Класс со списком товаров
 class GoodsListClass{
@@ -26,12 +36,31 @@ class GoodsListClass{
     addfullGods(list){
         let goodsList = list.map(item => this.addGoods(item.title, item.price, item.src));
     }
-    fetchGoods(cb){
+    fetchGoods(){
+        let goodsPromise = new Promise ((resolve, reject) =>{
+        makeGetRequest(`${API_URL}/catalogData.json`)
+        .then((goods) => {this.goods = JSON.parse(goods);
+            console.log(`${goods}`)})
+        .then(() => console.log('Второй этап'))
+        .catch((err) => {
+            console.error(`Ошибка: ${err}`)
+        })  
+        resolve('Успех');  
+        
+    })
+    return goodsPromise;
+    }
+    renderGoods(){
+        this.fetchGoods()
+            .then(() => console.log('Все хорошо'));
+    }
+
+    /*fetchGoods(cb){
         makeGetRequest(`${API_URL}/catalogData.json`,(goods) =>{
             this.goods = JSON.parse(goods);
             cb();
         })
-    }
+    }*/
     //добавление товара
     addGoods(title, price, src){
        let id = this.goods.length;
