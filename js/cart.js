@@ -41,7 +41,8 @@ class GoodsListClass{
         makeGetRequest(`${API_URL}/catalogData.json`)
         .then((goods) => {this.goods = JSON.parse(goods);
             console.log(`${goods}`)})
-        .then(() => console.log('Второй этап'))
+        //.then(() => console.log(``))
+        .then(() => {this.renderGoods()})
         .catch((err) => {
             console.error(`Ошибка: ${err}`)
         })  
@@ -51,8 +52,7 @@ class GoodsListClass{
     return goodsPromise;
     }
     renderGoods(){
-        this.fetchGoods()
-            .then(() => console.log('Все хорошо'));
+            this.renderGoodsListProm(this.goods);
     }
 
     /*fetchGoods(cb){
@@ -69,6 +69,14 @@ class GoodsListClass{
     //удаление товара
     deleteGoods(id){
         this.goods.splice(id,1);
+    }
+    renderGoodsItemProm(product_name, price){
+        return `<div class="goods-item"><h2 class="name-tovar">${product_name}</h2><p>${price}&#8381;</p><div class="btn-buy-goods" onclick="CartList1.addGoods(${ident},GoodsListClass1.goods[${ident}].title,GoodsListClass1.goods[${ident++}].price, 1);"></div></div>`;
+
+    }
+    renderGoodsListProm(list){
+        let goodsList = list.map(item => this.renderGoodsItemProm(item.product_name, item.price));
+        document.querySelector('.dz').innerHTML = goodsList.join("");
     }
     renderGoodsItem(title, price, src){
         return `<div class="goods-item"><h2 class="name-tovar">${title}</h2><img src="${src}"><p>${price}&#8381;</p><div class="btn-buy-goods" onclick="CartList1.addGoods(${ident},GoodsListClass1.goods[${ident}].title,GoodsListClass1.goods[${ident++}].price, 1);"></div></div>`;
@@ -206,5 +214,7 @@ class CartList{
         id = 0;
     GoodsListClass1.addfullGods(goods); // добавление списка товаров
     GoodsListClass1.renderGoodsList(GoodsListClass1.goods); // вывод товаров на страницу
+    GoodsListClass1.fetchGoods()
+    .then(() => console.log(GoodsListClass1.fetchGoods()))
     
   
