@@ -37,23 +37,23 @@ class GoodsListClass{
         let goodsList = list.map(item => this.addGoods(item.title, item.price, item.src));
     }
     fetchGoods(){
-        let goodsPromise = new Promise ((resolve, reject) =>{
-        makeGetRequest(`${API_URL}/catalogData.json`)
-        .then((goods) => {this.goods = JSON.parse(goods);
-            console.log(`${goods}`)})
+       
+       makeGetRequest(`${API_URL}/catalogData.json`)
+       .then((goods) => {this.goods = JSON.parse(goods);
+          console.log(`${goods}`)})
         //.then(() => console.log(``))
-        .then(() => {this.renderGoods()})
-        .catch((err) => {
-            console.error(`Ошибка: ${err}`)
-        })  
-        resolve('Успех');  
+        //.then(() => {this.renderGoods()})
+       // .catch((err) => {
+        //    console.error(`Ошибка: ${err}`)
+       // });  
         
-    })
-    return goodsPromise;
-    }
-    renderGoods(){
-            this.renderGoodsListProm(this.goods);
-    }
+    
+    return Promise.resolve();
+}
+    //renderGoods(){
+     //   this.renderGoodsListProm(this.goods);
+     //       return Promise.resolve();
+   // }
 
     /*fetchGoods(cb){
         makeGetRequest(`${API_URL}/catalogData.json`,(goods) =>{
@@ -67,16 +67,16 @@ class GoodsListClass{
         this.goods[id] = {title, price, src};
     }
     //удаление товара
-    deleteGoods(id){
+    deleteGoods(id) {
         this.goods.splice(id,1);
     }
     renderGoodsItemProm(product_name, price){
         return `<div class="goods-item"><h2 class="name-tovar">${product_name}</h2><p>${price}&#8381;</p><div class="btn-buy-goods" onclick="CartList1.addGoods(${ident},GoodsListClass1.goods[${ident}].title,GoodsListClass1.goods[${ident++}].price, 1);"></div></div>`;
-
     }
     renderGoodsListProm(list){
         let goodsList = list.map(item => this.renderGoodsItemProm(item.product_name, item.price));
         document.querySelector('.dz').innerHTML = goodsList.join("");
+        return Promise.resolve(list);
     }
     renderGoodsItem(title, price, src){
         return `<div class="goods-item"><h2 class="name-tovar">${title}</h2><img src="${src}"><p>${price}&#8381;</p><div class="btn-buy-goods" onclick="CartList1.addGoods(${ident},GoodsListClass1.goods[${ident}].title,GoodsListClass1.goods[${ident++}].price, 1);"></div></div>`;
@@ -214,7 +214,10 @@ class CartList{
         id = 0;
     GoodsListClass1.addfullGods(goods); // добавление списка товаров
     GoodsListClass1.renderGoodsList(GoodsListClass1.goods); // вывод товаров на страницу
-    GoodsListClass1.fetchGoods()
-    .then(() => console.log(GoodsListClass1.fetchGoods()))
+    //makeGetRequest(`${API_URL}/catalogData.json`)
+        GoodsListClass1.fetchGoods()
+        .then(GoodsListClass1.renderGoodsListProm(GoodsListClass1.goods));
+    // GoodsListClass1.fetchGoods()
+   // .then(() => console.log(GoodsListClass1.fetchGoods()))
     
   
