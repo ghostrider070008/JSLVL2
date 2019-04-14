@@ -1,42 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>Интернет-магазин</title>
-	<link rel="stylesheet" href="css/style.css">
-	
+<title>eShop</title>
 </head>
 <body>
-	<div class="cart-overlay">
-		<div class="cart-conteiner">
-			<div class="modal">
-				<h2 class="cart-name">Корзина товара</h2>
-				<div class="btn-close" onclick="CartList1.CartClose()">X</div>
-				<table class="table-cart"></table>
-			</div>
-		</div>
-	</div>
-	<header>
-		<h1>Интернет-магазин</h1>
-		<div class="cart" onclick="CartList1.renderGoodsList(CartList1.goods);CartList1.headerCart();CartList1.CallCart();"></div>
-	</header>
-	<main>
-		<div class="goods-list">
-		</div>
-		
-	</main>
-	
-	<div class="dz">
-		
-	</div>
-	<div class="cleaner"></div>
-	<footer>
-		<h3>&#169 Все права защищены! Незаконное копирование материалов сайта без ссылки на сайт защищенно авторскими
-			правами!</h3>
-	</footer>
+<header>
+<button class = "cart-button" type = "button">Корзина</button>
+</header>
+<main>
+<div class = "goods-list" ></div >
+</main>
 </body>
+<script src = "js/script2.js"></script>
 </html>
-<!--<script src="js/script.js"></script>-->
-<script src="js/variable.js"></script>
-<script src="js/cart.js"></script>
-
