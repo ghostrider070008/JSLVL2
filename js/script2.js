@@ -1,5 +1,12 @@
 //запрос на сервер
+const mathRandom = () =>{
+let ran = Math.random()*100;
+console.log(ran);
+return Math.round(ran);
+}
+
 const makeGETRequest = (url, callback) => {
+  let promise = new Promise((resolve, reject) => {
     var xhr;
   
     if (window.XMLHttpRequest) {
@@ -7,16 +14,33 @@ const makeGETRequest = (url, callback) => {
     } else if (window.ActiveXObject) { 
       xhr = new ActiveXObject("Microsoft.XMLHTTP");
     }
-  
-    xhr.onreadystatechange = function () {
+    xhr.onreadystatechange = () => {
       if (xhr.readyState === 4) {
-        callback(xhr.responseText);
+        let ran = mathRandom();
+        if (ran <= 60){
+          resolve(xhr.responseText);
+        }
+        else if (ran > 60 && (ran <= 80)){
+         let status = 404;
+          reject(status);
+        }
+        else if (ran > 80 ) {
+          setTimeout((status) =>{
+            status = 504;
+            reject(status)
+          }, 3000);
+       /* let status = 504;
+          reject(status);*/
+        };
+       // callback(xhr.responseText);
       }
     }
   
     xhr.open('GET', url, true);
     xhr.send();
-  }
+  });
+return promise;
+};
 //ссылка на файл заглушку
   const API_URL = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses';
 // класс товара
@@ -36,11 +60,13 @@ class GoodsList {
         this .goods = [];
         }
         fetchGoods(cb) {
-            makeGETRequest(`${API_URL}/catalogData.json`, (goods) => {
-                this.goods = JSON.parse(goods);
-                console.log(this.goods);
-                cb();
-              })
+            makeGETRequest(`${API_URL}/catalogData.json`)
+              .then((goods) => {this.goods = JSON.parse(goods);
+                console.log(`${goods}`)})
+              .then(() => {this.render()})
+              .catch((err) => {
+                  console.error(`Ошибка: ${err}`)
+              })  
 
            /* this .goods = [
             { title : 'Shirt' , price : 150 },
