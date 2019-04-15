@@ -1,10 +1,10 @@
-//запрос на сервер
+// функция генерации ответа
 const mathRandom = () =>{
 let ran = Math.random()*100;
 console.log(ran);
 return Math.round(ran);
 }
-
+//запрос на сервер
 const makeGETRequest = (url, callback) => {
   let promise = new Promise((resolve, reject) => {
     var xhr;
