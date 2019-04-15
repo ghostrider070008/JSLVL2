@@ -59,7 +59,7 @@ class GoodsList {
         constructor () {
         this .goods = [];
         }
-        fetchGoods(cb) {
+        fetchGoods() {
             makeGETRequest(`${API_URL}/catalogData.json`)
               .then((goods) => {this.goods = JSON.parse(goods);
                 console.log(`${goods}`)})
