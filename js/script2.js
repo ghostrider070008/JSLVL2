@@ -54,14 +54,33 @@ class GoodsItem {
     class="goods-item"><h3> ${ this .product_name} </h3><p> ${ this .price} </p></div>` ;
     }
     }
+
+   
+
 // класс список товара
 class GoodsList {
         constructor () {
         this .goods = [];
+        this.filteredGoods=[];
         }
+
+        // поиск
+
+        filterGoods(value){
+          const regexp = new RegExp (value, 'i');
+          this.filteredGoods = this.goods.filter(good => regexp.test(good.product_name));
+          this.render();
+        
+        }
+
+        //обработчик кнопки поиска
+
+        
+
         fetchGoods() {
             makeGETRequest(`${API_URL}/catalogData.json`)
               .then((goods) => {this.goods = JSON.parse(goods);
+                this.filteredGoods = JSON.parse(goods);
                 console.log(`${goods}`)})
               .then(() => {this.render()})
               .catch((err) => {
@@ -77,18 +96,32 @@ class GoodsList {
         }
         render() {
             let listHtml = '' ;
-            this .goods.forEach(good => {
+            this .filteredGoods.forEach(good => {
             const goodItem = new GoodsItem(good.product_name, good.price);
             listHtml += goodItem.render();
             });
             document .querySelector( '.goods-list' ).innerHTML = listHtml;
             }
         }
+        // обработчик кнопки поиска
+        
 
         const list = new GoodsList();
         list.fetchGoods(() => {
           list.render();
         });
+        
+       let searchButton = document.getElementById('searchButton');
+        // Обработчик события нажатия на кнопку искать
+        searchButton.addEventListener('click', (e) => {
+          let searchInput1 = document.getElementById('searchInput');
+          const value = searchInput1.value;
+          list.filterGoods(value);
+        });
+
+        
+               
+         
         
 
     
