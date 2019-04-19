@@ -10,15 +10,17 @@ let findText = () => {
 // функция замены
 let replaceStr = (value) => {
     value = String(value);
-let    tRepl = '\'';
-let     tRep2 = '\"';
-   // let regexp = /\s\'/g;
-  //const regexp = /\'\B/gi;
-   const regexp = new RegExp(`\\${tRepl}`, 'gi');
+    let    tRepl = '\'';
+    let     tRep2 = '\"';
+   let //regexp = /'/gi;
+   regexp = new RegExp(`${tRepl}`, 'gi');
     console.log(regexp);
     value = value.replace(regexp, tRep2);
-   // regexp = /\'\s/g;
-   // value = value.replace(regexp, tRep2);
+    //regexp = /\s"/gi;
+    regexp = new RegExp(`\\b${tRep2}\\b`, 'gi');
+    console.log(regexp);
+    //regexp = /\b"\b/gi;
+    value = value.replace(regexp, tRepl);
     console.log(value);
     }
 
