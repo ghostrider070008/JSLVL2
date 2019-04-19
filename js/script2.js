@@ -4,6 +4,7 @@ class QuoteClass {
     constructor(){
         this.text='';
     }
+    //получение из инпута текста
     findText = () => {
         let text = document.getElementById('textarea');
         this.text = text.value;
