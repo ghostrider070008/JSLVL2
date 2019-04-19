@@ -5,10 +5,10 @@
 </head>
 <body>
 <main>
-    <input type="text" id="nameIn"><br>
-    <input type="text" id="tel"><br>
-    <input type="email" id="eMail"><br>
-    <textarea name="texerea" id="textareaIn" cols="30" rows="10"></textarea><br>
+    <input type="text" id="nameIn" required placeholder="Ваше имя..."><label for="nameIn" id="nameLbl"></label><br>
+    <input type="text" id="tel" required placeholder="+7(000)000-0000" maxlength="15"><label for="tel" id="telLbl"></label><br>
+    <input type="email" id="eMail" required placeholder="Ваш e-mail..."><label for="eMail" id="eMailLbl"></label><br>
+    <textarea name="texerea" id="textareaIn" cols="30" rows="10" required placeholder="Произвольный текст..."></textarea><br>
     <button id="btn1">Валидировать</button>
     <p></p>
 </main>
