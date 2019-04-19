@@ -1,6 +1,35 @@
 "use strict";
+// класс ковычки
+class QuoteClass {
+    constructor(){
+        this.text='';
+    }
+    findText = () => {
+        let text = document.getElementById('textarea');
+        this.text = text.value;
+        this.replaceStr();
+            }
+    replaceStr = () => {
+        let    tRepl = '\'';
+        let     tRep2 = '\"';
+       let regexp = new RegExp(`${tRepl}`, 'gi');
+        console.log(regexp);
+        this.text = this.text.replace(regexp, tRep2);
+       
+        regexp = new RegExp(`\\b${tRep2}\\b`, 'gi');
+        console.log(regexp);
 
+        this.text = this.text.replace(regexp, tRepl);
+        console.log(this.text);
+        this.getRespon();
+        }
+        getRespon = (str1) =>{
+            let p_res = document.querySelector('p');
+            p_res.innerText = this.text;
+        }
+    }
 //получение текста из текстового поля
+/*
 let findText = () => {
     let text = document.getElementById('textarea');
     let str1 = text.value;
@@ -23,11 +52,13 @@ let replaceStr = (value) => {
     value = value.replace(regexp, tRepl);
     console.log(value);
     }
-
+    */
+let Quote = new QuoteClass;
 let btnRep = document.getElementById('button');
 btnRep.addEventListener('click',() =>{
-    let    str = findText();
-    replaceStr(str);
+    Quote.findText();
+//    Quote.replaceStr();
+//    Quote.getRespon();
 }, false);
 
 
