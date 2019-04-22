@@ -9,6 +9,7 @@ let app = new Vue ({
         products: [],
         imgCatalog: 'http://placehold.it/250x150',
         cart: [],
+        filteredGoods: [],
         show1: false,
         i: 0
 
