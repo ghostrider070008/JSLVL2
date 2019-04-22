@@ -20,8 +20,8 @@
 <div id="app">
     <header>
         <div class="find">
-            <input type="text" class="goods-search" v-model.lazy="searchLine">
-            <button class="search-button" type="button">Искать</button>
+            <input type="text" class="goods-search" v-model.lazy="searchLine" @change="filterGoods (searchLine)">
+            <button class="search-button" type="button" @click="filterGoods (searchLine)">Искать</button>
         </div>
     	<!--КОРЗИНА-->
         <div class="dropdown mydropdown">
@@ -39,7 +39,7 @@
     	<!--ЗАГРУЗКА ТОВАРОВ-->
         <div class="products">
             
-            <div class="product-item" v-for="product of products" :key="product.id_product">
+            <div class="product-item" v-for="product of filteredGoods" :key="product.id_product">
                 <img :src="imgCatalog" alt="">
                 <div class="desc">
                     <h3> {{ product.product_name }} </h3>

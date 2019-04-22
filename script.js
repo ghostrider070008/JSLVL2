@@ -27,27 +27,36 @@ let app = new Vue ({
           if (this.cart.length == 0 ){
           this.cart[this.i] = {id_product: product.id_product, product_name: product.product_name};
           console.log (product.id_product);
-          i = 0;
+          this.i = 0;
             this.i++;
             this.show1 = true;
           }
           else {
+            this.cart[this.i] = {id_product: product.id_product, product_name: product.product_name};
             console.log (product.id_product);
             this.i++;
           }
-        }
+        },
+        filterGoods(searchLine) {
+            const regexp = new RegExp(searchLine, 'i');
+            this.filteredGoods = this.products.filter(good => regexp.test(good.product_name));
+          }
+        
     },
     mounted () {
         this.getJson (`${API + this.catalogUrl}`)
             .then (data => {
                 for (let el of data) {
                     this.products.push (el)
+                    this.filteredGoods.push (el)
+
                 }
             });
         this.getJson (`getProducts.json`)
             .then (data => {
                 for (let el of data) {
                     this.products.push (el)
+                    this.filteredGoods.push (el)
                 }
             });
     }
