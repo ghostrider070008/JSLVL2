@@ -11,6 +11,7 @@ let app = new Vue ({
         cart: [],
         filteredGoods: [],
         show1: false,
+        searchLine: '',
         i: 0
 
     },
@@ -26,6 +27,7 @@ let app = new Vue ({
           if (this.cart.length == 0 ){
           this.cart[this.i] = {id_product: product.id_product, product_name: product.product_name};
           console.log (product.id_product);
+          i = 0;
             this.i++;
             this.show1 = true;
           }

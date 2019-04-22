@@ -19,6 +19,10 @@
 <body>
 <div id="app">
     <header>
+        <div class="find">
+            <input type="text" class="goods-search" v-model.lazy="searchLine">
+            <button class="search-button" type="button">Искать</button>
+        </div>
     	<!--КОРЗИНА-->
         <div class="dropdown mydropdown">
             <button class="cart-button dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
