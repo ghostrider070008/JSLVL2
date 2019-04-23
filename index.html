@@ -26,17 +26,17 @@
                     <h3>Ваша корзина</h3>
                     <table>
                         <tr>
-                            <td>№ п/п</td>
+                            <td>Артикул</td>
                             <td>Наименование</td>
                             <td>Количество</td>
                             <td>Цена</td>
                             <td>Стоимость</td>
                         </tr>
                         <tr v-for="productCart of cart" :key="productCart.id_product">
-                            <td>{{ i }}</td>
+                            <td>{{ productCart.id_product }}</td>
                             <td>{{ productCart.product_name }} </td>
                             <td></td>
-                            <td></td>
+                            <td>{{ productCart.price }}</td>
                             <td></td>
 
                         </tr>
@@ -47,6 +47,7 @@
     <header>
             <div class="find">
             <input type="text" class="goods-search" v-model.lazy="searchLine" @change="filterGoods (searchLine)">
+            
             <button class="search-button" type="button" @click="filterGoods (searchLine)">Искать</button>
         </div>
     	<!--КОРЗИНА-->

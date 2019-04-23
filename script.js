@@ -12,7 +12,6 @@ let app = new Vue ({
         filteredGoods: [],
         show1: false,
         searchLine: '',
-        i: 0,
         inVisibleCart: false
 
     },
@@ -27,16 +26,11 @@ let app = new Vue ({
         },
         addProduct (product) {
           if (this.cart.length == 0 ){
-          this.cart[this.i] = {id_product: product.id_product, product_name: product.product_name, product_indent: this.i};
-          console.log (product.id_product);
-          this.i = 0;
-            this.i++;
+            this.cart.push(product);
             this.show1 = true;
           }
           else {
-            this.cart[this.i] = {id_product: product.id_product, product_name: product.product_name};
-            console.log (product.id_product);
-            this.i++;
+            this.cart.push(product);
           }
         },
         filterGoods(searchLine) {

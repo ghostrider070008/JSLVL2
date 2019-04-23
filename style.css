@@ -124,6 +124,7 @@ header {
     min-height: 100px;
     background-color: aquamarine;
     margin: auto;
+    position: relative;
 }
 td{
     border: 2px solid black;
@@ -131,4 +132,12 @@ td{
 table{
     border-collapse: collapse;
     border: 2px solid black;
+}
+.btn-close:hover{
+    cursor: pointer;
+
+}
+.btn-close{
+    position: absolute;
+    right: 15px;
 }
