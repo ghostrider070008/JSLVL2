@@ -12,10 +12,12 @@ let app = new Vue ({
         filteredGoods: [],
         show1: false,
         searchLine: '',
-        i: 0
+        i: 0,
+        inVisibleCart: false
 
     },
     methods: {
+
         getJson (url) {
             return fetch (url)
                 .then (result => result.json ())
@@ -25,7 +27,7 @@ let app = new Vue ({
         },
         addProduct (product) {
           if (this.cart.length == 0 ){
-          this.cart[this.i] = {id_product: product.id_product, product_name: product.product_name};
+          this.cart[this.i] = {id_product: product.id_product, product_name: product.product_name, product_indent: this.i};
           console.log (product.id_product);
           this.i = 0;
             this.i++;
@@ -52,13 +54,14 @@ let app = new Vue ({
 
                 }
             });
+        /*
         this.getJson (`getProducts.json`)
             .then (data => {
                 for (let el of data) {
                     this.products.push (el)
                     this.filteredGoods.push (el)
                 }
-            });
+            });*/
     }
 });
 

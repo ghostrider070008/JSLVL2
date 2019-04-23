@@ -99,3 +99,36 @@ header {
     position: absolute;
     margin: 24px 0 0 15px;
 }
+.no-data-h3{
+    width: fit-content;
+    margin: 5em auto;
+    font-style: italic;
+    color: #808080;
+
+}
+.cart{
+    position: absolute;
+    display: table;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(107, 105, 105, 0.7)
+}
+.cart-overlay{
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+.cart-cart{
+    width: fit-content;
+    min-width: 300px;
+    min-height: 100px;
+    background-color: aquamarine;
+    margin: auto;
+}
+td{
+    border: 2px solid black;
+}
+table{
+    border-collapse: collapse;
+    border: 2px solid black;
+}
