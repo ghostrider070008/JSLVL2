@@ -20,7 +20,7 @@ Vue.component('another-component', {
   */
 
  Vue.component('el-comp', {
-     props: ['name'],
+    props: ['name'],
     template: '<h1>{{ name }}</h1>'
   });
   

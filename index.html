@@ -64,8 +64,9 @@
 
     <main>
         <!--ЗАГРУЗКА ТОВАРОВ-->
+        <goods-list :goods="filteredGoods"></goods-list> 
         <h3 v-if="filteredGoods.length == 0" class="no-data-h3">Нет данных</h3> <!--ЗАГЛУШКА ЕСЛИ НЕТ ДАННЫХ-->
-        <div v-else class="products">     
+        <div v-else class="products">    
             <div class="product-item" v-for="product of filteredGoods" :key="product.id_product">
                 <img :src="imgCatalog" alt="">
                 <div class="desc">
@@ -81,6 +82,7 @@
     
     <script src="vue.js"></script>
     <script src="script.js"></script> <!--ОСНОВНОЙ СКРИПТ-->
+    <script src="component.js"></script>
 
 
 	
