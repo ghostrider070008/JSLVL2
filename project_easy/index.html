@@ -5,15 +5,17 @@
     <title>Интернет-магазин</title>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style.css">
+    <script defer src="js/search.js"></script>
+    <script defer src="js/CartComp.js"></script>
+    <script defer src="js/ProdComp.js"></script>
+    <script defer src="js/main.js"></script>
 </head>
 <body>
 <div id="app">
     <header>
         <div class="logo">E-shop</div>
         <div class="cart">
-           <search 
-           :user-Saearch="userSearch"
-           @filter="filter"></search>
+            <search v-model="userSearch" @filter="filter"></search>          <!-- <search v-model="userSearch" v-model="filter" @filter="filter"></search>-->
             <!--
             <form action="#" class="search-form" @submit.prevent='filter'>
                 <input type="text" class="search-field" v-model="userSearch">
@@ -37,10 +39,7 @@
 </div>
     <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="js/search.js"></script>
-    <script src="js/CartComp.js"></script>
-    <script src="js/ProdComp.js"></script>
-    <script src="js/main.js"></script>
+    
     
 </body>
 </html>
