@@ -1,5 +1,5 @@
 Vue.component('search',{
-    props: ['userSearch'],
+    props: ['userSaearch'],
     template: `
     <form action="#" class="search-form" @submit.prevent="$emit('filter', userSearch)">
                 <input type="text" class="search-field" v-model="userSearch">
