@@ -18,7 +18,7 @@ Vue.component('cart-item', {
                             <p class="product-title">{{cartItem.product_name}}</p>
                             <p class="product-quantity">Quantity: {{cartItem.quantity}}</p>
                             <p class="product-single-price">$ {{cartItem.price}} each</p>
-                        </div>
+                        </div>  
                     </div>
                     <div class="right-block">
                         <p class="product-price">{{cartItem.quantity*cartItem.price}}</p>

@@ -8,6 +8,7 @@
     <script defer src="js/search.js"></script>
     <script defer src="js/CartComp.js"></script>
     <script defer src="js/ProdComp.js"></script>
+    <script defer src="js/eror.js"></script>
     <script defer src="js/main.js"></script>
 </head>
 <body>
@@ -15,7 +16,7 @@
     <header>
         <div class="logo">E-shop</div>
         <div class="cart">
-            <search v-model="userSearch" @filter="filter"></search>          <!-- <search v-model="userSearch" v-model="filter" @filter="filter"></search>-->
+            <search v-model="userSearch" @filter="filter"></search>
             <!--
             <form action="#" class="search-form" @submit.prevent='filter'>
                 <input type="text" class="search-field" v-model="userSearch">
@@ -32,6 +33,7 @@
         </div>
     </header>
     <main>
+        <errors v-show="error"></errors>
         <products :products="filtered" :img="imgCatalog" @add-product="addProduct"></products>
     </main>
 

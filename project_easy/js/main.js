@@ -11,14 +11,16 @@ let app = new Vue({
         filtered: [],
         cartItems: [],
         products: [],
-        imgCatalog: 'https://placehold.it/200x150'
+        imgCatalog: 'https://placehold.it/200x150',
+        error: false
     },
     methods: {
         getJson(url){
             return fetch(url)
                 .then(result => result.json())
                 .catch(error => {
-                    console.log(error)
+                    console.log(error);
+                    this.error = !this.error;
                 })
         },
         addProduct(product){
@@ -59,22 +61,34 @@ let app = new Vue({
                 for(let el of data.contents){
                     this.cartItems.push(el);
                 }
-            });
+            })
+            .catch(error => {
+                console.log(error);
+                this.error = !this.error;
+            })
         this.getJson(`${API + this.catalogUrl}`)
             .then(data => {
                 for(let el of data){
                     this.products.push(el);
                     this.filtered.push(el);
                 }
-            });
+            })
+            .catch(error => {
+                console.log(error);
+                this.error = !this.error;
+            })
         this.getJson(`getProducts.json`)
             .then(data => {
                 for(let el of data){
                     this.products.push(el);
                     this.filtered.push(el);
                 }
-            });
-    }
+            })
+            .catch(error => {
+                console.log(error);
+                this.error = !this.error;
+            })
+            }
 })
 // class List {
 //     constructor(url, container){
@@ -168,7 +182,7 @@ let app = new Vue({
 //
 //
 // }
-//
+//1~    
 // class ProductItem extends Item{}
 //
 //
