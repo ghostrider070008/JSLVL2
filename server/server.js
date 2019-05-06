@@ -29,13 +29,25 @@ const handler = require ('./handler');
 
 app.post ('/api/cart', (req, res) => {
     handler (req, res, 'add', 'server/db/userCart.json');
+    console.log('Добавление');
 });
+
+app.post ('/api/UpdateCart', (req, res) => {
+    handler (req, res, 'del', 'server/db/userCart.json');
+    сonsole.log('Удаление...');
+});
+
 
 app.put ('/api/cart/:id', (req, res) => {
     handler (req, res, 'change', 'server/db/userCart.json');
 });
 
-app.listen (3000, () => ('listening at port 3000...'));
+app.put ('/api/UpdateCart/:id', (req, res) => {
+    handler (req, res, 'changeDel', 'server/db/userCart.json');
+});
+
+
+app.listen (3000, () => (console.log('Сервер запущен...')));
 
 
 
