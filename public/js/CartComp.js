@@ -54,7 +54,7 @@ Vue.component('cart', {
             }
             else {
                 this.cartItems.splice(this.cartItems.indexOf(product), 1);
-                this.$parent.postJson(`/api/UpdateCart/`, this.cartItems);
+               // this.$parent.postJson(`/api/UpdateCart/`, this.cartItems);
                 console.log( this.cartItems);
 
         };
