@@ -2,93 +2,53 @@ const API = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-a
 
 let app = new Vue({
     el: '#app',
-    data: {
-        catalogUrl: '/catalogData.json',
-        cartUrl: '/getBasket.json',
-        showCart: false,
-        userSearch: '',
-        imgCart: 'https://placehold.it/50x100',
-        filtered: [],
-        cartItems: [],
-        products: [],
-        imgCatalog: 'https://placehold.it/200x150',
-        error: false
-    },
     methods: {
         getJson(url){
             return fetch(url)
                 .then(result => result.json())
                 .catch(error => {
-                    console.log(error);
-                    this.error = !this.error;
+                    this.$refs.error.setError(error);
+                    console.log(error)
                 })
         },
-        addProduct(product){
-            this.getJson(`${API}/addToBasket.json`)
-                .then(data => {
-                    if(data.result){
-                        let find = this.cartItems.find(el => el.id_product === product.id_product);
-                    if(find){
-                        find.quantity++;
-                    } else {
-                        let prod = Object.assign({quantity: 1}, product);
-                        this.cartItems.push(prod);
-                    }
-                    }
+        postJson(url, data){
+            return fetch(url, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify (data)
+            })
+                .then(result => result.json())
+                .catch(error => {
+                    this.$refs.error.setError(error);
+                    console.log(error)
                 })
         },
-        remove(product){
-            this.getJson(`${API}/deleteFromBasket.json`)
-                .then(data => {
-                    if(data.result){
-                        if(product.quantity > 1){
-                            product.quantity--;
-                        } else {
-                            this.cartItems.splice(this.cartItems.indexOf(product), 1);
-                        }
-                    }
+        putJson(url, data){
+            return fetch(url, {
+                method: 'PUT',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify (data)
+            })
+                .then(result => result.json())
+                .catch(error => {
+                    this.$refs.error.setError(error);
+                    console.log(error)
                 })
-        },
-        filter(){
-            let regexp = new RegExp(this.userSearch, 'i');
-            this.filtered = this.products.filter(el => regexp.test(el.product_name));
         }
+
+
+
+
     },
     mounted(){
 
-        this.getJson(`${API + this.cartUrl}`)
-            .then(data => {
-                for(let el of data.contents){
-                    this.cartItems.push(el);
-                }
-            })
-            .catch(error => {
-                console.log(error);
-                this.error = !this.error;
-            })
-        this.getJson(`${API + this.catalogUrl}`)
-            .then(data => {
-                for(let el of data){
-                    this.products.push(el);
-                    this.filtered.push(el);
-                }
-            })
-            .catch(error => {
-                console.log(error);
-                this.error = !this.error;
-            })
-        this.getJson(`getProducts.json`)
-            .then(data => {
-                for(let el of data){
-                    this.products.push(el);
-                    this.filtered.push(el);
-                }
-            })
-            .catch(error => {
-                console.log(error);
-                this.error = !this.error;
-            })
-            }
+
+
+    }
 })
 // class List {
 //     constructor(url, container){
@@ -182,7 +142,7 @@ let app = new Vue({
 //
 //
 // }
-//1~    
+//
 // class ProductItem extends Item{}
 //
 //
