@@ -6,7 +6,7 @@ let add = (cart, req) => {
 }
 
 let del = (cart, req) => {
-    console.log(`Удаление товара, ${req.body}`);
+    cart.contents.splice(cart.contents.indexOf(req.body), 1);
     return JSON.stringify (cart, null, 4);
 }
 
@@ -20,7 +20,6 @@ let change = (cart, req) => {
 let changeDel = (cart, req) => {
     let find  = cart.contents.find (el => el.id_product === +req.params.id);
     find.quantity -= req.body.quantity;
-    console.log(`req.body.quantity=${req.body.quantity}`);
     return JSON.stringify (cart, null, 4);
 }
 

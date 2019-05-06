@@ -47,7 +47,6 @@ Vue.component('cart', {
                     .then(data => {
                         if(data.result){
                             find.quantity--;
-                            console.log(find.quantity);
 
                         }
                     })
