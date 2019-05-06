@@ -32,10 +32,47 @@ app.post ('/api/cart', (req, res) => {
     console.log('Добавление');
 });
 
-app.post ('/api/UpdateCart', (req, res) => {
+app.post('/api/updateCart', (req, res) => {
+    fs.readFile('server/db/userCart.json', 'utf-8', (err, data) => {
+        if (err) {
+            res.send('{"result": 0}');
+        }
+        let cart = data;
+        cart.contents = req.body;
+        console.log(cart);
+        /*fs.writeFile('cart.json', JSON.stringify(cart), (err) => {
+            if(err) {
+                res.send('{"result": 0}');
+            } else {
+                res.send('{"result": 1}');
+            }
+            // console.log('Скрипт выполнен: товар добавлен в массив');
+        });*/
+    });
+});
+
+/*app.post('/api/updateCart', (req, res) => {
+    fs.readFile('server/db/userCart.json', 'utf-8', (err, data) => {
+        if(err) {
+            res.send('{"result": 0}');
+        }
+        console.log(data);
+        fs.writeFile('cart.json', JSON.stringify(cart1), (err) => {
+            if(err) {
+                res.send('{"result": 0}');
+            } else {
+                res.send('{"result": 1}');
+            }
+            // console.log('Скрипт выполнен: товар добавлен в массив');
+        });
+    });
+)}*/
+
+
+/*app.delete ('/api/updateCart', (req, res) => {
     handler (req, res, 'del', 'server/db/userCart.json');
     сonsole.log('Удаление...');
-});
+});*/
 
 
 app.put ('/api/cart/:id', (req, res) => {
@@ -45,6 +82,7 @@ app.put ('/api/cart/:id', (req, res) => {
 app.put ('/api/UpdateCart/:id', (req, res) => {
     handler (req, res, 'changeDel', 'server/db/userCart.json');
 });
+
 
 
 app.listen (3000, () => (console.log('Сервер запущен...')));

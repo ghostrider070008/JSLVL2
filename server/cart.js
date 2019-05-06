@@ -1,8 +1,6 @@
 let add = (cart, req) => {
     cart.contents.push (req.body);
     console.log('Добавление товара');
-    console.log(cart);
-    console.log(req.body);
     return JSON.stringify (cart, null, 4);
 
 }
