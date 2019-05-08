@@ -29,7 +29,6 @@ const static = require ('./static');
 
 app.post ('/api/cart', (req, res) => {
     handler (req, res, 'add', 'server/db/userCart.json');
-    static (req, res, 'add', 'server/db/static.json');
     console.log(req.body);
     console.log('Добавление');
 });
